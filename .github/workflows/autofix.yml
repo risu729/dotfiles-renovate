@@ -1,23 +1,13 @@
-# name must be autofix.ci for security reasons
-# ref: https://autofix.ci/security
 name: autofix.ci
 
-on:
-  pull_request:
-    branches:
-      - main
-  workflow_dispatch:
+on: []
 
 permissions: {}
-
-defaults:
-  run:
-    shell: bash
 
 jobs:
   autofix:
     name: Autofix
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
       contents: read # for checkout
