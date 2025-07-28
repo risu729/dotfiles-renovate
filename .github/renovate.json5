@@ -2,30 +2,4 @@
 	// ref: https://docs.renovatebot.com/configuration-options/
 	$schema: "https://docs.renovatebot.com/renovate-schema.json",
 	extends: ["github>risu729/renovate-config#3.8.2"],
-	packageRules: [
-		// set semantic commit types
-		{
-			// override the default semanticCommitType, fix for dependencies, to chore
-			matchFileNames: ["worker/package.json"],
-			semanticCommitType: "chore",
-		},
-		// add labels
-		{
-			matchFileNames: ["worker/**"],
-			addLabels: ["worker"],
-		},
-	],
-	// ref: https://docs.renovatebot.com/modules/manager/regex/#advanced-capture
-	customManagers: [
-		{
-			// cspell:ignore jsonata
-			customType: "jsonata",
-			description: "Updates PSScriptAnalyzer version",
-			managerFilePatterns: ["/^mise\\.toml$/"],
-			fileFormat: "toml",
-			datasourceTemplate: "github-releases",
-			packageNameTemplate: "PowerShell/PSScriptAnalyzer",
-			matchStrings: ['{ "currentValue": vars.PS_SCRIPT_ANALYZER_VERSION }'],
-		},
-	],
 }

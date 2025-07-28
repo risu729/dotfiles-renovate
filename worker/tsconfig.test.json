@@ -1,9 +1,0 @@
-{
-	// ref: https://www.typescriptlang.org/tsconfig/
-	"$schema": "https://json.schemastore.org/tsconfig",
-	"compilerOptions": {
-		"types": ["@cloudflare/vitest-pool-workers"]
-	},
-	"extends": ["./tsconfig.src.json"],
-	"include": ["test"]
-}
