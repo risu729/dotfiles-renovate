@@ -12,23 +12,14 @@
 	],
 	// ref: https://docs.renovatebot.com/modules/manager/regex/#advanced-capture
 	customManagers: [
-		{
-			customType: "jsonata",
-			description: "Updates mise versions in GitHub Actions",
-			managerFilePatterns: [
-				// ref: https://docs.renovatebot.com/modules/manager/github-actions/#file-matching
-				// cspell:ignore gitea forgejo
-				"/(^|/)(workflow-templates|\\.(?:github|gitea|forgejo)/(?:workflows|actions))/.+\\.ya?ml$/",
-				"/(^|/)action\\.ya?ml$/",
-			],
-			fileFormat: "yaml",
-			datasourceTemplate: "github-release-attachments",
-			depNameTemplate: "mise",
-			packageNameTemplate: "jdx/mise",
-			matchStrings: [
-				'$.jobs.*.steps[$substringBefore(uses, "@") = "jdx/mise-action"].with.{ "currentValue": version, "currentDigest": sha256 }',
-			],
-			autoReplaceStringTemplate: "{{newValue}}\n          {{newDigest}}"
-		},
+    {
+      customType: "regex",
+      description: "update mise",
+      managerFilePatterns: ["/(^|/)(workflow-templates|\\.(?:github|gitea|forgejo)/(?:workflows|actions))/.+\\.ya?ml$/", "/(^|/)action\\.ya?ml$/"],
+      datasourceTemplate: "github-release-attachments",
+      packageNameTemplate: "jdx/mise",
+      depNameTemplate: "mise",
+      matchStrings: ["jdx/mise-action.*\\n\\s*with:\\s*\\n\\s*version: [\"']?(?<currentValue>v[.\\d]+)[\"']?\\s*\\n\\s*sha256: [\"']?(?<currentDigest>\\w+)[\"']?"],
+    },
 	],
 }
